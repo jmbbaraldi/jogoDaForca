@@ -10,14 +10,43 @@ void limpaTela() {
     system("CLS");
 }
 
-void jogarSozinho() {
+string retornaPalavraAleatoria() {
     //Vetor com palavras disponíveis
     string palavras[3] = {"Abacaxi", "Manga", "Morango"};
 
     //Imprime ou 0 ou 1 ou 2
     int indiceAleatorio = rand() % 3;
 
-    cout << indiceAleatorio;
+    return palavras[indiceAleatorio];
+}
+
+string retornaPalavraComMascara(string palavra, int tamanhoDaPalavra) {
+    //Auxiliar contadora
+    int cont = 0;
+    string palavraComMascara;
+
+    //Aplica a máscara
+    while(cont < tamanhoDaPalavra) {
+        palavraComMascara += "_";
+        cont ++;
+    }
+
+    return palavraComMascara;
+}
+
+void jogarSozinho() {
+
+    //Palavra a ser adivinhada
+    string palavra = retornaPalavraAleatoria();
+
+    //Tamanho da palavra
+    int tamanhoDaPalavra = palavra.size();
+
+    //Palavra mascarada
+    string palavraComMascara = retornaPalavraComMascara(palavra, tamanhoDaPalavra);
+
+    cout << "A palavra secreta eh " << palavra << " | Tamanho da palavra: " << tamanhoDaPalavra;
+    cout << "\nMascara: " << palavraComMascara;
 }
 
 void menuInicial() {
