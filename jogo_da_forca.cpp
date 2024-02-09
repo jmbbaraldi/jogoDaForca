@@ -12,7 +12,7 @@ void limpaTela() {
 
 string retornaPalavraAleatoria() {
     //Vetor com palavras disponíveis
-    string palavras[3] = {"Abacaxi", "Manga", "Morango"};
+    string palavras[3] = {"abacaxi", "manga", "morango"};
 
     //Imprime ou 0 ou 1 ou 2
     int indiceAleatorio = rand() % 3;
@@ -52,10 +52,12 @@ void jogarSozinho() {
     //Palavra mascarada
     string palavraComMascara = retornaPalavraComMascara(palavra, tamanhoDaPalavra);
 
-    int tentativas = 0, maximoDeTentativas = 5;
-    char letra;
+    ///Variáveis Gerais
+    int tentativas = 0, maximoDeTentativas = 5;         //Número de tentativas
+    int i = 0;                                          //Auxiliar de laços de repetição
+    char letra;                                         //Letra arriscada pelo usuário
 
-    while(maximoDeTentativas - tentativas > 0) {
+    while(palavra != palavraComMascara && maximoDeTentativas - tentativas > 0) {
 
         limpaTela();
 
@@ -66,12 +68,29 @@ void jogarSozinho() {
         cout << "\nDigite uma letra: ";
         cin >> letra;
 
+        //Percorre a palavra e se a letra existir muda a palavra com máscara
+        for(i = 0; i < tamanhoDaPalavra; i++) {
+            //Se a letra existir
+            if(palavra[i] == letra) {
+                //Faz a letra aparecer na palavra com máscara
+                palavraComMascara[i] = palavra[i];
+            }
+        }
+
         //Aumenta uma tentativa realizada
         tentativas++;
     }
 
-    cout << "A palavra secreta eh " << palavra << " | Tamanho da palavra: " << tamanhoDaPalavra;
-    cout << "\nMascara: " << palavraComMascara;
+    if(palavra == palavraComMascara) {
+        //Vitória
+        limpaTela();
+        cout << "Parabens! Voce acertou a palavra";
+    }
+    else {
+        //Derrota
+        limpaTela();
+        cout << "O numero de tentativas se esgotou!";
+    }
 }
 
 void menuInicial() {
