@@ -51,7 +51,7 @@ void exibeStatus(string palavraComMascara, int tamanhoDaPalavra, int tentativasR
 
 }
 
-void jogarSozinho() {
+int jogarSozinho() {
 
     //Palavra a ser adivinhada
     string palavra = retornaPalavraAleatoria();
@@ -63,9 +63,10 @@ void jogarSozinho() {
     string palavraComMascara = retornaPalavraComMascara(palavra, tamanhoDaPalavra);
 
     ///Variáveis Gerais
-    int tentativas = 0, maximoDeTentativas = 5;         //Número de tentativas
+    int tentativas = 0, maximoDeTentativas = 10;        //Número de tentativas
     int i = 0;                                          //Auxiliar de laços de repetição
     char letra;                                         //Letra arriscada pelo usuário
+    int opcao;                                          //Opções finais
     string letrasJaArriscadas;                          //Acumula as tentativas do jogador
     string mensagem = "Bem-vindo ao jogo";              //Feedback do jogador
     string palavraArriscada;                            //Tentativa de arriscar a palavra completa
@@ -84,7 +85,7 @@ void jogarSozinho() {
 
         //Permite o usuário arriscar a palavra inteira
         if(letra == '1') {
-            cout << "\nSeu palpite: ";
+            cout << "\nSeu palpite(Palavra exata): ";
             cin >> palavraArriscada;
             if (palavraArriscada == palavra) {
                 palavraComMascara = palavraArriscada;
@@ -139,11 +140,21 @@ void jogarSozinho() {
         //Vitória
         limpaTela();
         cout << "Parabens! Voce acertou a palavra";
+        cout << "\nDeseja reiniciar? ";
+        cout << "\n1 - Sim";
+        cout << "\n2 - Nao\n";
+        cin >> opcao;
+        return opcao;
     }
     else {
         //Derrota
         limpaTela();
         cout << "O numero de tentativas se esgotou!";
+        cout << "\nDeseja reiniciar? ";
+        cout << "\n1 - Sim";
+        cout << "\n2 - Nao\n";
+        cin >> opcao;
+        return opcao;
     }
 }
 
@@ -162,8 +173,9 @@ void menuInicial() {
         switch(opcao) {
         case 1:
             //Inicia o jogo
-            cout << "Jogo iniciado\n";
-            jogarSozinho();
+            if(jogarSozinho() == 1) {
+                menuInicial();
+            }
 
             break;
 
