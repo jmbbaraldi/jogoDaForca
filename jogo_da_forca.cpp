@@ -68,6 +68,7 @@ void jogarSozinho() {
     char letra;                                         //Letra arriscada pelo usuário
     string letrasJaArriscadas;                          //Acumula as tentativas do jogador
     string mensagem = "Bem-vindo ao jogo";              //Feedback do jogador
+    string palavraArriscada;                            //Tentativa de arriscar a palavra completa
     bool jaDigitouLetra = false, acertouLetra = false;  //Auxiliar para saber se a letra foi ja foi digitada
 
     while(palavra != palavraComMascara && maximoDeTentativas - tentativas > 0) {
@@ -78,8 +79,20 @@ void jogarSozinho() {
         exibeStatus(palavraComMascara, tamanhoDaPalavra, maximoDeTentativas - tentativas, letrasJaArriscadas, mensagem);
 
         //Palpite
-        cout << "\nDigite uma letra: ";
+        cout << "\nDigite uma letra (Ou digite 1 para arriscar a palavra): ";
         cin >> letra;
+
+        //Permite o usuário arriscar a palavra inteira
+        if(letra == '1') {
+            cout << "\nSeu palpite: ";
+            cin >> palavraArriscada;
+            if (palavraArriscada == palavra) {
+                palavraComMascara = palavraArriscada;
+            }
+            else {
+                tentativas = maximoDeTentativas;
+            }
+        }
 
         //Percorre as letras já arriscadas
         for(i = 0; i < tentativas; i++) {
