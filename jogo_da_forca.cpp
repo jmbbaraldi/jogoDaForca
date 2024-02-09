@@ -51,10 +51,20 @@ void exibeStatus(string palavraComMascara, int tamanhoDaPalavra, int tentativasR
 
 }
 
-int jogarSozinho() {
+int jogar(int numeroDeJogadores) {
 
     //Palavra a ser adivinhada
-    string palavra = retornaPalavraAleatoria();
+    string palavra;
+
+    //Confere número de jogadores
+    if(numeroDeJogadores == 1) {
+        palavra = retornaPalavraAleatoria();
+    }
+    else {
+        cout << "\nDigite a palavra a ser adivinhada: \n";
+        cin >> palavra;
+    }
+
 
     //Tamanho da palavra
     int tamanhoDaPalavra = palavra.size();
@@ -105,7 +115,8 @@ int jogarSozinho() {
         }
 
         if(jaDigitouLetra == false) {
-            letrasJaArriscadas += letra;
+            //Incrementa letras arriscadas
+            letrasJaArriscadas += tolower(letra);
 
             //Percorre a palavra e se a letra existir muda a palavra com máscara
             for(i = 0; i < tamanhoDaPalavra; i++) {
@@ -165,26 +176,44 @@ void menuInicial() {
         limpaTela();
         cout << "Bem-vindo ao Jogo da Forca";
         cout << "\n1- Jogar";
-        cout << "\n2- Sobre";
-        cout << "\n3- Sair";
+        cout << "\n2- Jogar em Dupla";
+        cout << "\n3- Sobre";
+        cout << "\n4- Sair";
         cout << "\nEscolha uma opcao e tecle Enter: ";
         cin >> opcao;
 
         switch(opcao) {
         case 1:
             //Inicia o jogo
-            if(jogarSozinho() == 1) {
+            if(jogar(1) == 1) {
                 menuInicial();
             }
 
             break;
 
         case 2:
-            //Informações do jogo
-            cout << "Informacoes do jogo: ";
+
+            if(jogar(2) == 1) {
+                menuInicial();
+            }
+
             break;
 
         case 3:
+            //Informações do jogo
+            limpaTela();
+            cout << "Informacoes do jogo: ";
+            cout << "\nJogo desenvolvido por Joao Marcelo em 2024";
+            cout << "\n1- Voltar";
+            cout << "\n2- Sair\n";
+            cin >> opcao;
+            if(opcao == 1) {
+                menuInicial();
+            }
+
+            break;
+
+        case 4:
             //Saiu
             cout << "Ate mais!";
             break;
