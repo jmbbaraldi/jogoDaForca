@@ -73,14 +73,14 @@ int jogar(int numeroDeJogadores) {
     string palavraComMascara = retornaPalavraComMascara(palavra, tamanhoDaPalavra);
 
     ///Variáveis Gerais
-    int tentativas = 0, maximoDeTentativas = 10;        //Número de tentativas
-    int i = 0;                                          //Auxiliar de laços de repetição
-    char letra;                                         //Letra arriscada pelo usuário
-    int opcao;                                          //Opções finais
-    string letrasJaArriscadas;                          //Acumula as tentativas do jogador
-    string mensagem = "Bem-vindo ao jogo";              //Feedback do jogador
-    string palavraArriscada;                            //Tentativa de arriscar a palavra completa
-    bool jaDigitouLetra = false, acertouLetra = false;  //Auxiliar para saber se a letra foi ja foi digitada
+    int tentativas = 0, maximoDeTentativas = tamanhoDaPalavra + 5;          //Número de tentativas
+    int i = 0;                                                              //Auxiliar de laços de repetição
+    char letra;                                                             //Letra arriscada pelo usuário
+    int opcao;                                                              //Opções finais
+    string letrasJaArriscadas;                                              //Acumula as tentativas do jogador
+    string mensagem = "Bem-vindo ao jogo";                                  //Feedback do jogador
+    string palavraArriscada;                                                //Tentativa de arriscar a palavra completa
+    bool jaDigitouLetra = false, acertouLetra = false;                      //Auxiliar para saber se a letra foi ja foi digitada
 
     while(palavra != palavraComMascara && maximoDeTentativas - tentativas > 0) {
 
